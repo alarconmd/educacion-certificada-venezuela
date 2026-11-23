@@ -1,5 +1,9 @@
 # ESTADO DEL PROYECTO — checkpoint de reanudación
 
+**Sitio publicado:** https://alarconmd.github.io/educacion-certificada-venezuela/
+**Repositorio:** https://github.com/alarconmd/educacion-certificada-venezuela
+**PDF:** https://alarconmd.github.io/educacion-certificada-venezuela/informe.pdf
+
 > **Propósito de este archivo:** permitir que cualquier sesión nueva (o cualquier persona del equipo)
 > retome el trabajo **sin necesidad del historial de conversación**. Si el chat se corta por límite de
 > contexto, se lee este archivo y se continúa desde "Siguiente paso".

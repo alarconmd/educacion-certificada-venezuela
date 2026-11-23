@@ -5,6 +5,10 @@ laboral certificada en Venezuela (foco inicial: Caracas), con equipo base en Bog
 
 ## Qué contiene
 
+- **Sitio publicado:** https://alarconmd.github.io/educacion-certificada-venezuela/
+- **PDF:** https://alarconmd.github.io/educacion-certificada-venezuela/informe.pdf
+- **Repositorio:** https://github.com/alarconmd/educacion-certificada-venezuela
+
 - **Informe (PDF, 52 páginas):** contexto normativo, seis figuras certificables, permisos paso a paso,
   reglas de horas y presencialidad, oficios priorizados, viaje de la empresa y del cliente, economía,
   riesgos, anexos con modelos de documentos y **revisión adversarial**.

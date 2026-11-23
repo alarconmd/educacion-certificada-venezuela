@@ -122,6 +122,9 @@ def tabla_desde_filas(filas: list[list[str]]) -> Table | None:
 
 def leer_capitulos() -> list[pathlib.Path]:
     archivos = sorted(INFORME.glob("*.md"))
+    extra = ROOT / "revision" / "revision-adversarial.md"
+    if extra.exists():
+        archivos.append(extra)
     if not archivos:
         raise SystemExit("No hay archivos .md en informe/")
     return archivos
