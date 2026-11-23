@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Educación certificada para oficios · Venezuela</title>
+<meta name="description" content="Explorador interactivo de figuras certificables, oficios, permisos, viajes y economía para una empresa de formación laboral en Venezuela." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2312355b'/%3E%3Ctext x='32' y='42' font-size='28' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EVE%3C/text%3E%3C/svg%3E" />
+<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<header class="top">
+  <div class="brand">
+    <div class="mark">VE</div>
+    <div>
+      <h1>Educación certificada para oficios</h1>
+      <p>Venezuela · Caracas · simulador de decisiones</p>
+    </div>
+  </div>
+  <nav class="nav" aria-label="Secciones">
+    <a href="#/panel" data-route="panel">Panel</a>
+    <a href="#/figuras" data-route="figuras">Figuras</a>
+    <a href="#/oficios" data-route="oficios">Oficios</a>
+    <a href="#/permisos" data-route="permisos">Permisos</a>
+    <a href="#/viajes" data-route="viajes">Viajes</a>
+    <a href="#/economia" data-route="economia">Economía</a>
+    <a href="#/fuentes" data-route="fuentes">Fuentes</a>
+    <a href="#/verificar" data-route="verificar">Verificar</a>
+  </nav>
+  <div class="tools">
+    <button id="theme" class="ghost" title="Cambiar tema" aria-label="Cambiar tema">◐</button>
+    <a class="ghost" href="informe.pdf" target="_blank" rel="noopener" title="Descargar el informe en PDF">PDF</a>
+    <button id="export" class="ghost" title="Exportar configuración">Exportar</button>
+    <button id="open-config" class="ghost only-mobile" title="Abrir configuración">Config</button>
+  </div>
+</header>
+
+<div class="layout">
+  <aside id="config" class="config" aria-label="Configuración de la situación">
+    <div class="config-head">
+      <h2>Tu situación</h2>
+      <button id="close-config" class="ghost only-mobile" aria-label="Cerrar configuración">✕</button>
+    </div>
+    <p class="hint">Estos controles alimentan todas las secciones. El estado se guarda en la URL y en tu navegador.</p>
+
+    <label>Perfil principal
+      <select id="c-perfil">
+        <option value="persona">Persona que busca empleo</option>
+        <option value="empresa">Empresa que capacita</option>
+        <option value="fundador">Fundador / equipo desarrollador</option>
+      </select>
+    </label>
+
+    <label>Objetivo
+      <select id="c-objetivo">
+        <option value="empleo">Conseguir empleo formal</option>
+        <option value="ascenso">Ascender o recertificarse</option>
+        <option value="cumplimiento">Cumplir una obligación legal</option>
+        <option value="validar">Validar el modelo de negocio</option>
+      </select>
+    </label>
+
+    <label>Oficio de interés
+      <select id="c-oficio"></select>
+    </label>
+
+    <label>Horas disponibles
+      <input id="c-horas" type="range" min="8" max="240" step="4" />
+      <output id="o-horas">120 h</output>
+    </label>
+
+    <label>Modalidad preferida
+      <select id="c-modalidad">
+        <option value="virtual">Virtual</option>
+        <option value="mixta">Mixta</option>
+        <option value="presencial">Presencial</option>
+      </select>
+    </label>
+
+    <label>Presupuesto (USD)
+      <input id="c-presupuesto" type="number" min="0" max="2000" step="10" value="220" />
+    </label>
+
+    <label class="check"><input id="c-oficial" type="checkbox" /> Necesito una credencial con valor oficial</label>
+    <label class="check"><input id="c-practica" type="checkbox" checked /> Puedo asistir a práctica presencial</label>
+    <label class="check"><input id="c-tiempo" type="checkbox" /> Tengo 6+ meses para el proceso</label>
+
+    <div class="config-actions">
+      <button id="reset" class="ghost">Restablecer</button>
+      <button id="copy-link" class="primary">Copiar enlace</button>
+    </div>
+
+    <div class="mini">
+      <div><span>Figura sugerida</span><strong id="mini-figura">—</strong></div>
+      <div><span>Programa</span><strong id="mini-programa">—</strong></div>
+      <div><span>Semáforo</span><strong id="mini-semaforo">—</strong></div>
+    </div>
+  </aside>
+
+  <main id="main" class="main" tabindex="-1">
+    <section id="view-panel" class="view"></section>
+    <section id="view-figuras" class="view"></section>
+    <section id="view-oficios" class="view"></section>
+    <section id="view-permisos" class="view"></section>
+    <section id="view-viajes" class="view"></section>
+    <section id="view-economia" class="view"></section>
+    <section id="view-fuentes" class="view"></section>
+    <section id="view-verificar" class="view"></section>
+  </main>
+</div>
+
+<footer class="foot">
+  <p><strong>Aviso:</strong> herramienta de exploración estratégica. No sustituye opinión jurídica ni pronunciamiento de autoridad. Las cifras son hipótesis paramétricas.</p>
+  <p>Fuente de datos: <code>datos/*.json</code> · Informe completo en PDF · Versión 1.0</p>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/data.js?v=3"></script>
+<script src="assets/app.js?v=3"></script>
+</body>
+</html>

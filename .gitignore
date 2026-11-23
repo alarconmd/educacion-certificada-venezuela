@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Salidas temporales
+salida/muestra/
+
+# Imágenes renderizadas de respaldo (los PDF originales sí se conservan)
+fuentes/imagenes-cnu/
+fuentes/imagenes-loe/
+fuentes/imagenes-loe-lo/
+
+# Sistema
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Herramientas
+.playwright-mcp/
+node_modules/
