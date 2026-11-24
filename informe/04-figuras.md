@@ -17,15 +17,15 @@ No todas las credenciales valen lo mismo ni cuestan lo mismo. La matriz ordena s
 
 **Qué es.** Un curso, taller o entrenamiento diseñado para que una persona adquiera o refuerce una habilidad concreta, sin conducir a un título del sistema educativo.
 
-**Quién puede emitir.** Cualquier persona jurídica con objeto social de capacitación. No requiere autorización educativa previa porque no invade competencias del sistema formal.
+**Quién puede emitir.** Una persona jurídica con objeto social de capacitación puede preparar esta figura, pero la revisión documental **no permite afirmar que esté exenta de autorización educativa en todos los casos**. Antes de ofrecerla deben cerrarse el alcance de la LOE y la Resolución 1791 mediante dictamen independiente y consulta a la Zona Educativa, además de los registros mercantiles y obligaciones aplicables.
 
-**Base jurídica.** Libertad de empresa (CRBV art. 112), derecho al trabajo (art. 87) y silencio de la LOE sobre la formación ocupacional de adultos.
+**Base jurídica.** Libertad de empresa (CRBV art. 112), derecho al trabajo (art. 87) y revisión acotada de la LOE sobre formación ocupacional de adultos. Estas referencias no equivalen a un pronunciamiento administrativo ni a una compuerta jurídica cerrada.
 
 **Documento.** Constancia de participación o de aprovechamiento. Debe incluir: nombre del participante, cédula, nombre del curso, carga horaria, fechas, modalidad, contenidos, criterios de evaluación, resultado (participó/aprobó), código de verificación y firma del responsable académico.
 
-**Lo que nunca debe decir.** "Título", "diploma", "certificación oficial", "avalado por el INCES", "reconocido por el Ministerio". Cualquiera de esas frases convierte un producto legal en un problema.
+**Lo que nunca debe decir.** "Título", "diploma", "certificación oficial", "avalado por el INCES", "reconocido por el Ministerio" sin respaldo verificable. Esas frases crean un riesgo de publicidad engañosa y de usurpación de funciones educativas.
 
-**Horas y modalidad.** Libres. Un curso de 12 horas puede ser tan legítimo como uno de 120; lo que cambia es la profundidad de la competencia y el precio que el mercado acepta.
+**Horas y modalidad.** No se identificó un mínimo nacional general para esta figura de adultos. La duración debe corresponder a la competencia, la evaluación y la práctica; no basta con elegir horas por precio o conveniencia.
 
 **Valor real.** Depende de tres cosas: la marca, el instructor y **la empresa que contrata**. Un certificado propio vale poco en abstracto; vale mucho si tres empleadores de la zona dicen "a mí me sirve".
 
@@ -68,9 +68,9 @@ No todas las credenciales valen lo mismo ni cuestan lo mismo. La matriz ordena s
 
 **Quién puede emitir.** Solo una IES (universidad, instituto universitario o colegio universitario) o su fundación, conforme a su reglamento. Un particular no puede emitir diplomados aunque contrate docentes universitarios.
 
-**Base jurídica.** Ley de Universidades, reglamentos internos y normas del CNU. No existe una ley nacional que fije horas; el estándar de **120 a 200 horas y 75 % de asistencia** es una práctica institucional extendida que debe verificarse en cada reglamento.
+**Base jurídica.** Ley de Universidades, reglamentos internos y normas del CNU. No se identificó una ley nacional que fije una duración general para estos cursos de adultos. La duración de **120 a 200 horas** y la asistencia de **75 %** deben atribuirse al reglamento de la IES que efectivamente las establezca. Por separado, el art. 109 del Reglamento General de la LOE de 1999 fijó 75 % de asistencia para la educación básica escolar: es un antecedente histórico de otro nivel educativo, no la fuente de una regla general para diplomados.
 
-**Horas y modalidad.** El reglamento de la IES manda. En la práctica: mínimo 120 horas para un diplomado, asistencia mínima de 75 %, evaluación final y trabajo integrador. La virtualidad depende de si el reglamento la admite.
+**Horas y modalidad.** El reglamento de la IES manda. Duración, asistencia mínima, evaluación final, trabajo integrador y virtualidad se verifican en ese instrumento; no se presumen a partir de una práctica universitaria genérica.
 
 **Valor real.** Alto en el sector público y en concursos, porque es una credencial académica verificable. También es la puerta para que un egresado continúe estudios de postgrado.
 

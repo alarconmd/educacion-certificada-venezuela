@@ -25,8 +25,47 @@
     oficial: false, practica: true, tiempo: false,
     figura: "", vista: "panel", tema: "",
   };
+  const ECON_BASE = VIAJES.escenarios.find((e) => e.id === "base");
+  const LIMITES_ECON = {
+    cohortes: [4, 48, 1], alumnos: [8, 40, 1], precio: [60, 500, 10],
+    variable: [20, 150, 5], fijo: [20000, 200000, 2000],
+  };
+  const CAMPOS_ECON = { cohortes: "cohortesAnio", alumnos: "alumnosPorCohorte", precio: "precioPromedioUSD", variable: "costoVariableUSD", fijo: "costoFijoAnualUSD" };
+  const esObjeto = (v) => !!v && typeof v === "object" && !Array.isArray(v);
 
   let estado = { ...estadoInicial };
+
+  function numeroSeguro(valor, fallback, min, max, paso = 0) {
+    if (typeof valor !== "number" || !Number.isFinite(valor)) return fallback;
+    let n = Math.min(max, Math.max(min, valor));
+    if (paso) n = min + Math.round((n - min) / paso) * paso;
+    return Math.min(max, Math.max(min, n));
+  }
+
+  /* Allowlist estricta: nunca se copian propiedades desconocidas desde URL o almacenamiento. */
+  function normalizarEstado(crudo) {
+    const x = esObjeto(crudo) ? crudo : {};
+    const limpio = { ...estadoInicial };
+    if (["persona", "empresa", "fundador"].includes(x.perfil)) limpio.perfil = x.perfil;
+    if (["empleo", "ascenso", "cumplimiento", "validar"].includes(x.objetivo)) limpio.objetivo = x.objetivo;
+    if (PROGRAMAS.some((p) => p.id === x.oficio)) limpio.oficio = x.oficio;
+    if (["virtual", "mixta", "presencial"].includes(x.modalidad)) limpio.modalidad = x.modalidad;
+    if (FIGURAS.some((f) => f.id === x.figura)) limpio.figura = x.figura;
+    if (["", "light", "dark"].includes(x.tema)) limpio.tema = x.tema;
+    if (["panel", "figuras", "oficios", "permisos", "viajes", "economia", "verificar", "fuentes"].includes(x.vista)) limpio.vista = x.vista;
+    limpio.horas = numeroSeguro(x.horas, limpio.horas, 8, 240, 4);
+    limpio.presupuesto = numeroSeguro(x.presupuesto, limpio.presupuesto, 0, limpio.perfil === "fundador" ? 60000 : 2000, 10);
+    ["practica", "oficial", "tiempo"].forEach((k) => {
+      if (typeof x[k] === "boolean") limpio[k] = x[k];
+    });
+    if (esObjeto(x.econ)) {
+      limpio.econ = {};
+      Object.entries(LIMITES_ECON).forEach(([k, [min, max, paso]]) => {
+        limpio.econ[k] = numeroSeguro(x.econ[k], ECON_BASE[CAMPOS_ECON[k]], min, max, paso);
+      });
+    }
+    return limpio;
+  }
 
   /* ---------- estado ---------- */
   function leerEstado() {
@@ -35,20 +74,21 @@
       const raw = url.searchParams.get("s");
       if (raw) {
         const parsed = JSON.parse(decodeURIComponent(escape(atob(raw.replace(/-/g, "+").replace(/_/g, "/")))));
-        estado = { ...estadoInicial, ...parsed };
+        estado = normalizarEstado(parsed);
         return;
       }
     } catch (e) { /* ignora URL corrupta */ }
     try {
       const raw = localStorage.getItem(CLAVE);
-      if (raw) estado = { ...estadoInicial, ...JSON.parse(raw) };
+      if (raw) estado = normalizarEstado(JSON.parse(raw));
     } catch (e) { /* ignora almacenamiento bloqueado */ }
   }
 
   function guardarEstado() {
-    try { localStorage.setItem(CLAVE, JSON.stringify(estado)); } catch (e) { /* noop */ }
+    const limpio = normalizarEstado(estado);
+    try { localStorage.setItem(CLAVE, JSON.stringify(limpio)); } catch (e) { /* noop */ }
     try {
-      const json = JSON.stringify(estado);
+      const json = JSON.stringify(limpio);
       const b64 = btoa(unescape(encodeURIComponent(json))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
       const url = new URL(window.location.href);
       url.searchParams.set("s", b64);
@@ -83,34 +123,67 @@
   function puntuarFigura(f) {
     let s = 55;
     const razones = [];
+    const programa = PROGRAMAS.find((p) => p.id === estado.oficio);
     if (estado.oficial) {
       const v = VALOR_OFICIAL[f.id] || 0;
-      s += v * 9;
-      razones.push(v >= 2 ? "tiene valor oficial o institucional" : "no da valor oficial por sí sola");
-    } else if (f.id === "capacitacion-no-formal" || f.id === "curso-avalado") {
+      s += v >= 2 ? v * 9 : -28;
+      razones.push(v >= 2 ? "Tiene valor oficial o institucional" : "No satisface por sí sola el requisito oficial");
+    } else if (["capacitacion-no-formal", "curso-avalado"].includes(f.id)) {
       s += 12;
-      razones.push("rápida de lanzar");
+      razones.push("Compatible con una validación inicial, sujeta a sus compuertas");
     }
-    if (!estado.practica && (f.id === "tecnico-medio" || f.id === "iso17024")) s -= 18;
+    if (!estado.practica && ["tecnico-medio", "iso17024", "competencias-inces"].includes(f.id)) {
+      s -= 18;
+      razones.push("Exige práctica o evaluación presencial");
+    }
     if (!estado.tiempo && ["tecnico-medio", "iso17024", "competencias-inces"].includes(f.id)) {
       s -= 20;
-      razones.push("requiere meses de trámite");
+      razones.push("Requiere meses de trámite");
     }
-    if (estado.tiempo && (f.id === "competencias-inces" || f.id === "curso-avalado")) s += 8;
-    const costo = COSTO_ENTRADA[f.id] || 0;
-    if (estado.presupuesto * 12 < costo) {
-      s -= 15;
-      razones.push("costo de entrada alto para tu presupuesto");
+    if (estado.tiempo && ["competencias-inces", "curso-avalado"].includes(f.id)) s += 8;
+    if (estado.perfil === "fundador") {
+      const costo = COSTO_ENTRADA[f.id] || 0;
+      if (estado.presupuesto < costo) {
+        s -= 15;
+        razones.push(`Costo de entrada ${money(costo)} superior al capital declarado`);
+      }
+    }
+    if (programa && programa.figura === f.id) {
+      s += 4;
+      razones.push("Coherente con el oficio seleccionado");
+    }
+    if (f.id === "diplomado" && estado.horas < 120) {
+      s -= 12;
+      razones.push("Disponibilidad inferior a la referencia institucional de 120 h");
+    }
+    if (f.id === "curso-avalado" && estado.horas < 40) {
+      s -= 6;
+      razones.push("Disponibilidad corta para un curso avalado con práctica");
+    }
+    if (f.id === "tecnico-medio") {
+      s -= 20;
+      razones.push("Plan formal plurianual: no equivale a las horas de un curso");
+      if (estado.modalidad === "virtual") {
+        s -= 25;
+        razones.push("La media técnica no puede resolverse como curso 100 % virtual");
+      }
+    }
+    if (estado.modalidad === "virtual" && ["competencias-inces", "iso17024"].includes(f.id)) {
+      s -= 8;
+      razones.push("La evaluación práctica debe resolverse fuera de la virtualidad");
     }
     if (estado.objetivo === "cumplimiento" && f.id === "capacitacion-no-formal") {
-      s += 14; razones.push("resuelve cumplimiento sin trámite educativo");
+      s += 6;
+      razones.push("Puede documentar formación interna; no cierra por sí sola la compuerta jurídica");
     }
-    if (estado.objetivo === "ascenso" && (f.id === "curso-avalado" || f.id === "diplomado")) {
-      s += 10; razones.push("suma para ascenso");
+    if (estado.objetivo === "ascenso" && ["curso-avalado", "diplomado"].includes(f.id)) {
+      s += 10;
+      razones.push("Puede sumar para ascenso si el empleador la acepta");
     }
-    if (estado.objetivo === "empleo" && (f.id === "competencias-inces" || f.id === "curso-avalado")) s += 6;
+    if (estado.objetivo === "empleo" && ["competencias-inces", "curso-avalado"].includes(f.id)) s += 6;
     if (estado.perfil === "empresa" && f.id === "capacitacion-no-formal") {
-      s += 8; razones.push("fácil de comprar por una empresa");
+      s += 8;
+      razones.push("Formato comprable por una empresa, sujeto a alcance legal");
     }
     if (estado.perfil === "persona" && f.id === "iso17024") s += 4;
     return { figura: f, score: Math.max(5, Math.min(98, Math.round(s))), razones };
@@ -206,8 +279,18 @@
     return `<div class="bar${clase}"><i style="width:${Math.max(4, Math.min(100, score))}%"></i></div>`;
   }
 
+  function alActivar(elemento, accion) {
+    elemento.addEventListener("click", accion);
+    elemento.addEventListener("keydown", (ev) => {
+      if (ev.key === "Enter" || ev.key === " ") {
+        ev.preventDefault();
+        accion();
+      }
+    });
+  }
+
   function cardPrograma(p) {
-    return `<article class="card click" data-programa="${esc(p.id)}">
+    return `<article class="card click" data-programa="${esc(p.id)}" tabindex="0" role="button" aria-label="Seleccionar ${esc(p.nombre)}">
       <div class="row"><h3>${esc(p.nombre)}</h3><span class="spacer"></span>${semaforoHTML(p.riesgo >= 4 ? "rojo" : p.riesgo >= 3 ? "amarillo" : "verde")}</div>
       <p>${esc(p.cluster)} · ${p.horas} h · ${p.horasPractica} h de práctica · ${esc(p.modalidad)}</p>
     </article>`;
@@ -242,13 +325,15 @@
           <div class="row"><h3>Recomendación para tu situación</h3><span class="spacer"></span>${semaforoHTML(f.semaforo)}</div>
           <p>${esc(f.cuando)}</p>
           <div class="kpi">
-            <div><span>Afinidad</span><strong>${ranking[0].score}%</strong></div>
+            <div><span>Índice heurístico</span><strong>${(ranking.find((r) => r.figura.id === f.id) || ranking[0]).score}/100</strong></div>
             <div><span>Costo de entrada</span><strong>${money(COSTO_ENTRADA[f.id] || 0)}</strong></div>
             <div><span>Horas</span><strong>${esc(f.horas)}</strong></div>
           </div>
           <div class="bars">
-            ${ranking.slice(0, 4).map((r) => `<div class="row"><span>${esc(r.figura.nombre)}</span>${barra(r.score)}<strong>${r.score}%</strong></div>`).join("")}
+            ${ranking.slice(0, 4).map((r) => `<div class="row"><span>${esc(r.figura.nombre)}</span>${barra(r.score)}<strong>${r.score}/100</strong></div>`).join("")}
           </div>
+          <div class="note strong" style="margin-top:10px"><strong>Compuerta jurídica:</strong> ${esc(f.autorizacion)}</div>
+          <p class="small">Índice ordinal para comparar alternativas; no es una probabilidad ni un porcentaje validado.</p>
         </article>
 
         <article class="card">
@@ -265,7 +350,7 @@
         <article class="card">
           <h3>Programa sugerido</h3>
           ${p ? `<p><strong>${esc(p.nombre)}</strong><br/>${p.horas} h · ${p.horasPractica} h de práctica · ${esc(p.modalidad)}</p>
-          <div class="kpi"><div><span>Precio estimado</span><strong>${money(precio)}</strong></div><div><span>Afinidad</span><strong>${compatibilidadPrograma(p)}%</strong></div></div>
+          <div class="kpi"><div><span>Precio estimado</span><strong>${money(precio)}</strong></div><div><span>Índice heurístico</span><strong>${compatibilidadPrograma(p)}/100</strong></div></div>
           <p class="small">${esc(p.salida)}</p>` : "<p>Sin programa seleccionado.</p>"}
         </article>
         <article class="card">
@@ -277,8 +362,8 @@
         </article>
         <article class="card">
           <h3>Siguiente decisión</h3>
-          <p>${estado.tiempo ? "Con tiempo disponible, la ruta de aval y competencias es viable." : "Sin tiempo para trámites, empieza por capacitación no formal y construye evidencia."}</p>
-          <p class="small">${esc(ranking[0].razones.join(" · ") || "Sin restricciones detectadas")}</p>
+          <p>${estado.tiempo ? "Con tiempo disponible, puedes evaluar aval y competencias; ninguna ruta queda autorizada automáticamente." : "Con poco tiempo, prepara un piloto no formal y evidencia, pero no lo ofrezcas hasta cerrar la compuerta jurídica."}</p>
+          <p class="small">${esc((ranking.find((r) => r.figura.id === f.id) || ranking[0]).razones.join(" · ") || "Sin restricciones detectadas")}</p>
         </article>
       </div>
 
@@ -300,11 +385,11 @@
             <div><span>Trámites</span><strong>${TRAMITES.length}</strong></div>
             <div><span>Fuentes</span><strong>${FUENTES.length}</strong></div>
           </div>
-          <p class="small" style="margin-top:8px">Mejor programa por afinidad: <strong>${esc(mejor ? mejor.nombre : "—")}</strong> (${mejor ? mejor.score : 0}%).</p>
+          <p class="small" style="margin-top:8px">Mejor índice heurístico de programa: <strong>${esc(mejor ? mejor.nombre : "—")}</strong> (${mejor ? mejor.score : 0}/100).</p>
         </article>
       </div>
     `;
-    $$("#view-panel [data-programa]").forEach((c) => c.addEventListener("click", () => seleccionarPrograma(c.dataset.programa)));
+    $$("#view-panel [data-programa]").forEach((c) => alActivar(c, () => seleccionarPrograma(c.dataset.programa)));
   }
 
   function seleccionarPrograma(id) {
@@ -313,7 +398,6 @@
     estado.oficio = p.id;
     estado.horas = p.horas;
     estado.modalidad = p.modalidad;
-    estado.presupuesto = Math.max(estado.presupuesto, precioEstimado(p));
     sincronizarControles();
     guardarEstado();
     renderizar(ruta());
@@ -331,7 +415,7 @@
       </div>
       <div class="grid g3">
         ${FIGURAS.map((f) => `
-          <article class="card click ${f.id === actual.id ? "sel" : ""}" data-figura="${esc(f.id)}">
+          <article class="card click ${f.id === actual.id ? "sel" : ""}" data-figura="${esc(f.id)}" tabindex="0" role="button" aria-pressed="${f.id === actual.id ? "true" : "false"}">
             <h3>${esc(f.nombre)}</h3>
             <p>${esc(f.emisor)}</p>
             <div class="row">${semaforoHTML(f.semaforo)}<span class="chip dark">${esc(f.horas)}</span></div>
@@ -354,13 +438,13 @@
         </article>
       </div>
     `;
-    $$("#view-figuras [data-figura]").forEach((c) => c.addEventListener("click", () => {
+    $$("#view-figuras [data-figura]").forEach((c) => alActivar(c, () => {
       estado.figura = c.dataset.figura;
       guardarEstado();
       renderizar("figuras");
       actualizarMini();
     }));
-    $$("#view-figuras [data-programa]").forEach((c) => c.addEventListener("click", () => seleccionarPrograma(c.dataset.programa)));
+    $$("#view-figuras [data-programa]").forEach((c) => alActivar(c, () => seleccionarPrograma(c.dataset.programa)));
   }
 
   /* ---------- oficios ---------- */
@@ -393,8 +477,8 @@
         <table>
           <thead><tr><th>Oficio</th><th>Cluster</th><th>Horas</th><th>Práctica</th><th>Demanda</th><th>Riesgo</th><th>Figura</th></tr></thead>
           <tbody>
-            ${lista.map((p) => `<tr data-oficio="${esc(p.id)}" style="cursor:pointer">
-              <td><strong>${esc(p.nombre)}</strong><br/><span class="muted small">${esc(p.salida)}</span></td>
+            ${lista.map((p) => `<tr>
+              <td><button type="button" class="btn-link" data-oficio="${esc(p.id)}">${esc(p.nombre)}</button><br/><span class="muted small">${esc(p.salida)}</span></td>
               <td>${esc(p.cluster)}</td><td>${p.horas}</td><td>${p.horasPractica} h</td>
               <td>${"●".repeat(p.demanda)}${"○".repeat(5 - p.demanda)}</td>
               <td>${"●".repeat(p.riesgo)}${"○".repeat(5 - p.riesgo)}</td>
@@ -437,7 +521,7 @@
       <article class="card">
         <h3>Encaje y siguiente paso</h3>
         <div class="kpi">
-          <div><span>Afinidad contigo</span><strong>${compatibilidadPrograma(p)}%</strong></div>
+          <div><span>Índice heurístico</span><strong>${compatibilidadPrograma(p)}/100</strong></div>
           <div><span>Precio estimado</span><strong>${money(precioEstimado(p))}</strong></div>
           <div><span>Figura inicial</span><strong>${esc(f.nombre || p.figura)}</strong></div>
         </div>
@@ -454,14 +538,31 @@
   const CLAVE_CHECK = CLAVE + "-check";
 
   function progreso() {
-    try { return JSON.parse(localStorage.getItem(CLAVE_CHECK)) || {}; }
-    catch (e) { return {}; }
+    try {
+      const raw = JSON.parse(localStorage.getItem(CLAVE_CHECK));
+      if (!esObjeto(raw)) return {};
+      return Object.fromEntries(Object.entries(raw).filter(([k, v]) => /^[a-zA-Z0-9_-]+$/.test(k) && typeof v === "boolean"));
+    } catch (e) { return {}; }
   }
 
   function marcar(id, valor) {
     const p = progreso();
+    const tramite = TRAMITES.find((t) => t.id === id);
+    if (valor && tramite && (tramite.dependeDe || []).some((d) => !p[d])) return false;
     p[id] = valor;
+    if (!valor) {
+      const limpiarDependientes = (previo) => {
+        TRAMITES.filter((t) => (t.dependeDe || []).includes(previo)).forEach((t) => {
+          if (p[t.id]) {
+            p[t.id] = false;
+            limpiarDependientes(t.id);
+          }
+        });
+      };
+      limpiarDependientes(id);
+    }
     try { localStorage.setItem(CLAVE_CHECK, JSON.stringify(p)); } catch (e) { /* noop */ }
+    return true;
   }
 
   function ordenarPorDependencia(items) {
@@ -499,7 +600,7 @@
       </div>
       <div class="row" style="margin:16px 0">
         <a class="btn" href="#/figuras">Cambiar figura</a>
-        <button id="marcar-bloqueantes" class="ghost">Marcar bloqueantes</button>
+        <button id="marcar-bloqueantes" class="ghost">Marcar bloqueantes + previos</button>
         <button id="limpiar-permisos" class="ghost">Limpiar</button>
         <button id="imprimir" class="ghost">Imprimir</button>
       </div>
@@ -507,14 +608,16 @@
         ${items.map((t) => {
           const listo = !!p[t.id];
           const faltan = (t.dependeDe || []).filter((d) => items.some((x) => x.id === d) && !p[d]);
-          return `<label class="check-item ${esc(t.criticidad)} ${listo ? "ok" : ""}">
-            <input type="checkbox" data-check="${esc(t.id)}" ${listo ? "checked" : ""} />
+          const bloqueado = faltan.length > 0 && !listo;
+          return `<label class="check-item ${esc(t.criticidad)} ${listo && !faltan.length ? "ok" : ""}">
+            <input type="checkbox" data-check="${esc(t.id)}" ${listo ? "checked" : ""} ${bloqueado ? "disabled" : ""} />
             <div>
               <h4>${esc(t.nombre)}</h4>
               <p><strong>${esc(t.autoridad)}</strong> · ${esc(t.plazo)} · ${money(t.costoUSD || 0)}</p>
               <p>${esc(t.nota)}</p>
               <p class="small"><strong>Documentos:</strong> ${t.docs.map(esc).join(" · ")}</p>
               ${faltan.length ? `<p class="small" style="color:var(--amber)">Requiere antes: ${faltan.map((d) => esc((items.find((x) => x.id === d) || {}).nombre || d)).join(", ")}</p>` : ""}
+              ${listo && faltan.length ? `<p class="small" style="color:var(--red)">Marcado heredado fuera de secuencia: desmárcalo y completa los previos.</p>` : ""}
             </div>
             <span class="tag">${esc(t.criticidad)}</span>
           </label>`;
@@ -523,13 +626,21 @@
       <div class="note" style="margin-top:16px">La ruta es una guía de secuencia, no un contrato. Los plazos y costos son estimaciones y deben confirmarse con cada autoridad. La consulta a la Zona Educativa (anexo D1 del informe) es el paso que cierra la zona gris.</div>
     `;
     $$("#view-permisos [data-check]").forEach((c) => c.addEventListener("change", () => {
-      marcar(c.dataset.check, c.checked);
+      if (!marcar(c.dataset.check, c.checked)) toast("Completa primero los trámites prerequisitos");
       renderizar("permisos");
     }));
     $("#marcar-bloqueantes").addEventListener("click", () => {
-      items.filter((t) => t.criticidad === "bloqueante").forEach((t) => marcar(t.id, true));
+      const ids = new Set();
+      const agregarConPrevios = (id) => {
+        if (ids.has(id)) return;
+        ids.add(id);
+        const t = TRAMITES.find((x) => x.id === id);
+        (t && t.dependeDe ? t.dependeDe : []).forEach(agregarConPrevios);
+      };
+      items.filter((t) => t.criticidad === "bloqueante").forEach((t) => agregarConPrevios(t.id));
+      ordenarPorDependencia(TRAMITES.filter((t) => ids.has(t.id))).forEach((t) => marcar(t.id, true));
       renderizar("permisos");
-      toast("Bloqueantes marcados");
+      toast("Bloqueantes y prerequisitos marcados");
     });
     $("#limpiar-permisos").addEventListener("click", () => {
       items.forEach((t) => marcar(t.id, false));
@@ -638,6 +749,9 @@
     const e = econActual();
     const r = calcular(e);
     const escenarios = VIAJES.escenarios || [];
+    const b2b = VIAJES.modeloB2B;
+    const flujo = VIAJES.flujoCaja || [];
+    let acumulado = 0;
     const caja = $("#econ-out");
     if (!caja) return;
     caja.innerHTML = `
@@ -652,7 +766,7 @@
             <div><span>Contribución</span><strong>${money(r.contribucion)}</strong></div>
             <div><span>Margen</span><strong>${r.margen.toFixed(1)}%</strong></div>
           </div>
-          <p class="small" style="margin-top:10px">Punto de equilibrio: <strong>${Number.isFinite(r.breakeven) ? fmt(r.breakeven) + " alumnos/año" : "no alcanzable"}</strong>${Number.isFinite(r.breakeven) ? ` (${(r.breakeven / e.alumnos).toFixed(1)} cohortes)` : ""}.</p>
+          <p class="small" style="margin-top:10px">Punto de equilibrio: <strong>${Number.isFinite(r.breakeven) ? fmt(r.breakeven) + " alumnos/año" : "no alcanzable"}</strong>${Number.isFinite(r.breakeven) ? ` (${Math.ceil(r.breakeven / e.alumnos)} cohortes enteras)` : ""}.</p>
           ${barra(Math.max(0, Math.min(100, (r.contribucion / Math.max(e.fijo, 1)) * 100)))}
           <p class="small">Contribución frente a costo fijo. Si la barra no llega al 100 %, el año cierra en pérdida.</p>
         </article>
@@ -680,6 +794,30 @@
         </div>
         <p class="small">${esc(escenarios.map((s) => s.nombre + ": " + s.nota).join(" · "))}</p>
       </article>
+      ${b2b ? `<article class="card" style="margin-top:14px">
+        <div class="row"><h3>Contrato B2B de referencia</h3><span class="spacer"></span><span class="chip dark">Supuesto N4</span></div>
+        <p>${esc(b2b.estado)}. ${esc(b2b.nota)}</p>
+        <div class="kpi">
+          <div><span>Alumnos / horas</span><strong>${b2b.alumnosPorContrato} / ${b2b.horasPorContrato} h</strong></div>
+          <div><span>Facturación por contrato</span><strong>${money(b2b.precioContratoUSD)}</strong></div>
+          <div><span>Contribución por contrato</span><strong>${money(b2b.contribucionContratoUSD)}</strong></div>
+          <div><span>Margen de contribución</span><strong>${(100 * b2b.contribucionContratoUSD / b2b.precioContratoUSD).toFixed(1)}%</strong></div>
+        </div>
+        <p class="small" style="margin-top:10px">${b2b.facilitadoresPorContrato} facilitador · ${b2b.horasPracticaPresencial} h presenciales · ${esc(b2b.condicionCobro)}. Tres contratos aportan ${money(b2b.contratosBase * b2b.contribucionContratoUSD)} antes de costos fijos; no constituyen una venta adicional automática.</p>
+      </article>` : ""}
+      <article class="card" style="margin-top:14px">
+        <h3>Flujo de caja del escenario base</h3>
+        <p class="small">Referencia fija conciliada con el escenario base; no cambia con los controles del simulador.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Trimestre</th><th>Inscripciones</th><th>Ingresos</th><th>Egresos</th><th>Neto</th><th>Acumulado</th></tr></thead>
+          <tbody>${flujo.map((t) => {
+            const neto = t.ingresos - t.egresos;
+            acumulado += neto;
+            return `<tr><td>${esc(t.trimestre)}</td><td>${t.inscripciones}</td><td>${money(t.ingresos)}</td><td>${money(t.egresos)}</td><td>${money(neto)}</td><td>${money(acumulado)}</td></tr>`;
+          }).join("")}</tbody>
+        </table></div>
+        <p class="small">Cierre: <strong>${money(acumulado)}</strong>, igual al resultado base. Déficit acumulado máximo: USD 11.400 en T1. La reserva adicional para puesta en marcha, impuestos, morosidad y desviaciones no está incluida en esta tabla.</p>
+      </article>
     `;
   }
 
@@ -689,16 +827,16 @@
     $("#view-economia").innerHTML = `
       <div class="hero">
         <h2>¿Cierra el modelo?</h2>
-        <p>Mueve los controles y observa el efecto. La conclusión del informe es incómoda: solo B2C, sin aval y sin empresas, el negocio no alcanza el punto de equilibrio. La palanca no es recortar: es subir valor percibido y volumen B2B.</p>
+        <p>Mueve los controles y observa el efecto. El escenario pesimista no alcanza el punto de equilibrio. B2B puede aportar caja solamente cuando cada contrato cubre sus costos y deja contribución; los precios y márgenes mostrados son hipótesis por validar.</p>
       </div>
       <div class="grid g2">
         <article class="card">
           <h3>Supuestos</h3>
-          <label>Cohortes al año <output id="o-cohortes">${e.cohortes}</output><input id="e-cohortes" type="range" min="4" max="48" step="1" value="${e.cohortes}" /></label>
-          <label>Alumnos por cohorte <output id="o-alumnos">${e.alumnos}</output><input id="e-alumnos" type="range" min="8" max="40" step="1" value="${e.alumnos}" /></label>
-          <label>Precio promedio (USD) <output id="o-precio">${money(e.precio)}</output><input id="e-precio" type="range" min="60" max="500" step="10" value="${e.precio}" /></label>
-          <label>Costo variable por alumno <output id="o-variable">${money(e.variable)}</output><input id="e-variable" type="range" min="20" max="150" step="5" value="${e.variable}" /></label>
-          <label>Costo fijo anual <output id="o-fijo">${money(e.fijo)}</output><input id="e-fijo" type="range" min="20000" max="200000" step="2000" value="${e.fijo}" /></label>
+          <label>Cohortes al año <output id="o-cohortes"></output><input id="e-cohortes" type="range" min="4" max="48" step="1" /></label>
+          <label>Alumnos por cohorte <output id="o-alumnos"></output><input id="e-alumnos" type="range" min="8" max="40" step="1" /></label>
+          <label>Precio promedio (USD) <output id="o-precio"></output><input id="e-precio" type="range" min="60" max="500" step="10" /></label>
+          <label>Costo variable por alumno <output id="o-variable"></output><input id="e-variable" type="range" min="20" max="150" step="5" /></label>
+          <label>Costo fijo anual <output id="o-fijo"></output><input id="e-fijo" type="range" min="20000" max="200000" step="2000" /></label>
           <div class="row" style="margin-top:10px">
             ${escenarios.map((s) => `<button class="ghost" data-escenario="${esc(s.id)}">${esc(s.nombre)}</button>`).join("")}
           </div>
@@ -710,9 +848,11 @@
     const mapa = { cohortes: "o-cohortes", alumnos: "o-alumnos", precio: "o-precio", variable: "o-variable", fijo: "o-fijo" };
     Object.entries(mapa).forEach(([k, id]) => {
       const input = $("#e-" + k);
+      const out = $("#" + id);
+      input.value = String(e[k]);
+      out.textContent = ["precio", "variable", "fijo"].includes(k) ? money(e[k]) : String(e[k]);
       input.addEventListener("input", () => {
         e[k] = Number(input.value);
-        const out = $("#" + id);
         if (k === "precio" || k === "variable" || k === "fijo") out.textContent = money(e[k]);
         else out.textContent = e[k];
         pintarEconomia();
@@ -744,7 +884,7 @@
     $("#view-fuentes").innerHTML = `
       <div class="hero">
         <h2>Biblioteca de fuentes</h2>
-        <p>Cada afirmación del informe se apoya en una norma, un acto institucional o una norma técnica. Los enlaces son la referencia primaria; antes de citarlos en un escrito, confirma la gaceta y la vigencia.</p>
+        <p>N1 exige texto oficial, vigencia y pasaje contrastados. N2 identifica evidencia secundaria, técnica o institucional todavía pendiente de ese contraste; N4 señala alcance por validar. Una URL o copia local no equivale por sí sola a verificación jurídica.</p>
       </div>
       <div class="filters">
         <label>Buscar<input id="fu-q" type="search" value="${esc(fuenteFiltro.q)}" placeholder="norma, emisor, tema" /></label>
@@ -753,10 +893,11 @@
       </div>
       <div class="grid g2">
         ${lista.map((f) => `<article class="card">
-          <div class="row"><h3>${esc(f.titulo)}</h3><span class="spacer"></span><span class="chip dark">${esc(f.tipo)}</span></div>
+          <div class="row"><h3>${esc(f.titulo)}</h3><span class="spacer"></span><span class="chip dark">${esc(f.nivel || "N2")}</span><span class="chip dark">${esc(f.tipo)}</span></div>
           <p class="small"><strong>${esc(f.emisor)}</strong> · ${esc(f.fecha)} · ${esc(f.gaceta)}</p>
           <p><strong>Uso:</strong> ${esc(f.uso)}</p>
-          <div class="note">${esc(f.cautela)}</div>
+          <div class="note"><strong>Verificación:</strong> ${esc(f.estadoVerificacion || "Pendiente")}<br/>${esc(f.cautela)}</div>
+          ${f.copiaLocal ? `<p class="small" style="overflow-wrap:anywhere"><strong>Copia:</strong> <code>${esc(f.copiaLocal)}</code><br/><strong>SHA-256:</strong> <code>${esc(f.sha256Copia)}</code></p>` : ""}
           <p style="margin-top:8px"><a href="${esc(f.url)}" target="_blank" rel="noopener">Abrir fuente →</a></p>
         </article>`).join("")}
       </div>
@@ -771,21 +912,15 @@
   /* ---------- verificador demo ---------- */
   const DEMO = {
     "VE-ELEC-2026-000123": { nombre: "María Rodríguez", curso: "Instalaciones eléctricas residenciales", horas: 120, modalidad: "mixta", fecha: "2026-06-30", estado: "vigente", evidencia: "Tablero y canalización evaluados" },
-    "VE-REFR-2025-000987": { nombre: "Luis Pérez", curso: "Refrigeración y climatización", horas: 160, modalidad: "mixta", fecha: "2025-11-15", estado: "revocado", evidencia: "Revocado por inconsistencia documental" },
+    "VE-REFR-2025-000987": { nombre: "Luis Pérez", curso: "Refrigeración y climatización", horas: 160, modalidad: "mixta", fecha: "2025-11-15", estado: "revocado", revocadoEl: "2026-02-15", evidencia: "Revocado por inconsistencia documental" },
     "VE-ATEN-2026-000456": { nombre: "Ana Gómez", curso: "Atención al cliente y ventas", horas: 80, modalidad: "virtual", fecha: "2026-03-10", estado: "vigente", evidencia: "Role-play y examen final" },
   };
-
-  function hashSimple(texto) {
-    let h = 0;
-    for (let i = 0; i < texto.length; i++) h = (h * 31 + texto.charCodeAt(i)) >>> 0;
-    return h.toString(16).padStart(8, "0").toUpperCase();
-  }
 
   function renderVerificar() {
     $("#view-verificar").innerHTML = `
       <div class="hero">
         <h2>Verificador de certificados (demostración)</h2>
-        <p>Un certificado sin verificación es un PDF decorativo. Así debería funcionar el endpoint público: código único, estado, curso, horas y hash del documento. Prueba los códigos de ejemplo.</p>
+        <p>Demostración con registros ficticios y sin PDF asociado. El diseño productivo exige identificadores no enumerables, SHA-256 real, estado de revocación, minimización de datos, consentimiento y límites de consulta.</p>
       </div>
       <div class="grid g2">
         <article class="card">
@@ -795,7 +930,7 @@
             <button id="v-buscar" class="primary">Verificar</button>
             <button id="v-limpiar" class="ghost">Limpiar</button>
           </div>
-          <p class="small muted" style="margin-top:10px">Formato: <code>VE-XXXX-AAAA-000000</code>. En producción, el QR del certificado apunta aquí y el hash SHA-256 se compara con el PDF.</p>
+          <p class="small muted" style="margin-top:10px">Formato ficticio: <code>VE-XXXX-AAAA-000000</code>. Es predecible y solo sirve para esta demo; producción debe usar identificadores aleatorios y SHA-256 calculado sobre el PDF.</p>
         </article>
         <article class="card">
           <h3>Qué debe mostrar el verificador</h3>
@@ -820,12 +955,12 @@
     const caja = $("#v-resultado");
     const patron = /^VE-[A-Z]{4}-\d{4}-\d{6}$/;
     if (!patron.test(codigo)) {
-      caja.innerHTML = `<div class="note strong"><strong>Formato inválido.</strong> Usa el patrón VE-XXXX-AAAA-000000. Un código mal formado no debe devolver datos: evita filtraciones por enumeración.</div>`;
+      caja.innerHTML = `<div class="note strong"><strong>Formato inválido.</strong> Usa el patrón VE-XXXX-AAAA-000000. Un código mal formado no debe devolver datos.</div>`;
       return;
     }
     const d = DEMO[codigo];
     if (!d) {
-      caja.innerHTML = `<div class="note strong"><strong>No encontrado.</strong> El código no existe en la base de demostración. En producción, responde igual para códigos inexistentes y revocados, y registra el intento.</div>`;
+      caja.innerHTML = `<div class="note strong"><strong>No encontrado.</strong> El código no existe en la base de demostración. En producción se responde igual solo ante códigos desconocidos; los revocados conocidos deben mostrar su estado. Aplica límites de consulta, registro de abuso e identificadores aleatorios no enumerables.</div>`;
       return;
     }
     const vigente = d.estado === "vigente";
@@ -841,10 +976,11 @@
           <div><span>Horas</span><strong>${d.horas} h</strong></div>
           <div><span>Modalidad</span><strong>${esc(d.modalidad)}</strong></div>
           <div><span>Fecha</span><strong>${esc(d.fecha)}</strong></div>
-          <div><span>Hash del documento</span><strong>${hashSimple(codigo + d.nombre)}</strong></div>
+          <div><span>Huella documental</span><strong>No calculada en esta demo</strong></div>
         </div>
         <p style="margin-top:10px"><strong>Evidencia:</strong> ${esc(d.evidencia)}</p>
-        ${vigente ? "" : `<div class="note strong" style="margin-top:10px">Este certificado fue revocado. El verificador debe explicar el motivo y la fecha, sin exponer datos personales innecesarios.</div>`}
+        <div class="note" style="margin-top:10px">La demo no contiene el PDF: no calcula SHA-256 ni prueba integridad. En producción se calcula sobre el documento emitido y se almacena con un sello de tiempo.</div>
+        ${vigente ? "" : `<div class="note strong" style="margin-top:10px">Certificado revocado el <strong>${esc(d.revocadoEl || "sin fecha registrada")}</strong>. Motivo: ${esc(d.evidencia)}. No se exponen datos personales innecesarios.</div>`}
       </article>`;
   }
 
@@ -887,7 +1023,7 @@
     if (sel) sel.innerHTML = PROGRAMAS.map((p) => `<option value="${esc(p.id)}">${esc(p.nombre)}</option>`).join("");
     sincronizarControles();
 
-    const cambiar = (fn) => { fn(); guardarEstado(); renderizar(ruta()); };
+    const cambiar = (fn) => { fn(); estado = normalizarEstado(estado); sincronizarControles(); guardarEstado(); renderizar(ruta()); };
 
     $("#c-perfil").addEventListener("change", (e) => cambiar(() => { estado.perfil = e.target.value; }));
     $("#c-objetivo").addEventListener("change", (e) => cambiar(() => { estado.objetivo = e.target.value; }));

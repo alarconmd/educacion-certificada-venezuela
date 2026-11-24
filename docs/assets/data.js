@@ -5,15 +5,15 @@ window.DATOS = {
       "id": "capacitacion-no-formal",
       "nombre": "Capacitación laboral no formal",
       "emisor": "Empresa privada (persona jurídica) que NO se constituye como institución educativa",
-      "base": "CRBV arts. 87, 89 y 112; la LOE 2009 no regula la formación no formal de adultos; no existe norma que exija autorización para capacitación empresarial",
-      "autorizacion": "Ninguna autorización educativa previa. Solo cumplimiento mercantil, municipal, laboral y tributario",
+      "base": "CRBV arts. 87, 89 y 112. La revisión documental no identificó un permiso educativo específico para capacitación no formal de adultos; el alcance de la LOE y la Resolución 1791 debe confirmarse por escrito",
+      "autorizacion": "Condicionado: obtener dictamen independiente y consulta a la Zona Educativa antes de ofrecer. Cumplir además obligaciones mercantiles, municipales, laborales y tributarias",
       "documento": "Constancia de participación o aprovechamiento (NO título, NO certificado de competencia, NO 'certificación oficial')",
       "horas": "Libres: 8 a 120 h",
-      "modalidad": "100% virtual admitida",
-      "valor": "Bajo-medio. Depende de marca, del instructor y de empresas ancla que la acepten",
-      "riesgo": "Medio si se comunica como credencial oficial; alto si se dirige a niños o adolescentes en edad escolar",
-      "cuando": "Arranque rápido, validación de demanda, formación interna B2B, mercado privado",
-      "semaforo": "verde"
+      "modalidad": "Virtual, mixta o presencial según el oficio y la evidencia de práctica",
+      "valor": "Bajo frente a cliente formal hasta acreditar resultados; mejora con aval o verificación pública",
+      "riesgo": "Medio y no cerrado: alcance educativo pendiente; alto si se promete una credencial oficial o se dirige a educación escolar",
+      "cuando": "Piloto sujeto a compuerta jurídica escrita, validación de demanda, formación interna B2B, mercado privado",
+      "semaforo": "amarillo"
     },
     {
       "id": "curso-avalado",
@@ -36,8 +36,8 @@ window.DATOS = {
       "base": "Ley de Universidades (1970); reglamentos internos de educación continua; normas del CNU",
       "autorizacion": "Ser IES o tener convenio con una. Un particular no puede emitir diplomados por sí solo",
       "documento": "Diploma o certificado de diplomado con registro de la IES",
-      "horas": "Estándar institucional 120 a 200 h y 75% de asistencia (no es regla legal general)",
-      "modalidad": "Según reglamento de la IES; muchas admiten virtual o mixta",
+      "horas": "El reglamento de cada IES define duración y asistencia. Las referencias de 120-200 h y 75 % no son una regla legal general para adultos",
+      "modalidad": "Según reglamento de la IES; muchas admiten virtual o mixta. El art. 109 del Reglamento de 1999 era escolar e histórico",
       "valor": "Alto en sector público y en concursos; reconocido como educación continua",
       "riesgo": "Alto si se emite sin IES: uso indebido de denominación y de fe pública",
       "cuando": "Productos premium, convenios con universidades, programas de 5-8 meses",
@@ -96,7 +96,9 @@ window.DATOS = {
       "gaceta": "G.O. 36.860; enmienda G.O. 5.908 Ext. (2009)",
       "url": "https://www.tsj.gob.ve/",
       "uso": "Arts. 87, 89, 102-105, 109, 112: derecho al trabajo, educación, autonomía y libertad de empresa",
-      "cautela": "Verificar la numeración en el texto consolidado de 2009"
+      "cautela": "Verificar la numeración en el texto consolidado de 2009",
+      "nivel": "N2",
+      "estadoVerificacion": "Evidencia secundaria/técnica o copia pendiente de contraste oficial y vigencia"
     },
     {
       "id": "loe2009",
@@ -107,7 +109,11 @@ window.DATOS = {
       "gaceta": "G.O. 5.929 Extraordinario",
       "url": "https://www.asambleanacional.gob.ve/storage/documentos/leyes/ley-organi-20220131130620.pdf",
       "uso": "Estructura del sistema educativo, niveles y modalidades, educación media técnica y universitaria",
-      "cautela": "PDF oficial escaneado; citar por artículo y página, no por copias de terceros"
+      "cautela": "PDF oficial escaneado; citar por artículo y página, no por copias de terceros",
+      "nivel": "N2",
+      "estadoVerificacion": "Evidencia secundaria/técnica o copia pendiente de contraste oficial y vigencia",
+      "copiaLocal": "fuentes/loe-2009-ucv.pdf",
+      "sha256Copia": "23e8cf8c876a4bba59b45e8479ead9c6cb81e5b0bbdcb8d62f4bcfdc60be3a21"
     },
     {
       "id": "res1791",
@@ -118,7 +124,9 @@ window.DATOS = {
       "gaceta": "G.O. 36.566 del 23/10/1998",
       "url": "https://pandectasdigital.blogspot.com/2018/08/regimen-sobre-autorizacion-y.html",
       "uso": "Procedimiento de autorización, documentos, art. 19 (prohibiciones), arts. 21-24 (cátedras y servicios)",
-      "cautela": "Dictada bajo la LOE de 1980. Confirmar por escrito su aplicación a cursos de adultos"
+      "cautela": "Dictada bajo la LOE de 1980. Confirmar por escrito su aplicación a cursos de adultos",
+      "nivel": "N2",
+      "estadoVerificacion": "Evidencia secundaria/técnica o copia pendiente de contraste oficial y vigencia"
     },
     {
       "id": "reglamento1999",
@@ -129,7 +137,11 @@ window.DATOS = {
       "gaceta": "G.O. 36.787, Decreto 313",
       "url": "https://venezuela.justia.com/federales/reglamentos/reglamento-general-de-la-ley-organica-de-educacion/",
       "uso": "Régimen escolar, evaluación, planteles; referencia histórica y residual",
-      "cautela": "Reglamenta la LOE de 1980, no la de 2009. No citar como vigente sin análisis"
+      "cautela": "Reglamenta la LOE de 1980, no la de 2009. No citar como vigente sin análisis",
+      "nivel": "N2",
+      "estadoVerificacion": "Evidencia secundaria/técnica o copia pendiente de contraste oficial y vigencia",
+      "copiaLocal": "fuentes/textos/reglamento-general-loe.txt",
+      "sha256Copia": "f5dd5f405cd1f71fd44b9564671dac0aaf986c06a2f6eab0e41eb8e0ecc875c7"
     },
     {
       "id": "inces2014",
@@ -140,7 +152,11 @@ window.DATOS = {
       "gaceta": "G.O. 6.155 Extraordinario",
       "url": "https://www.asambleanacional.gob.ve/storage/documentos/leyes/decreto-1414-mediante-el-cual-se-dicta-el-decreto-con-rango-valor-y-fuerza-de-ley-del-instituto-nacional-de-capacitacion-y-educacion-socialista-20211103124657.pdf",
       "uso": "Arts. 22, 24 y 25: certificación de saberes, valor laboral y registro de instancias",
-      "cautela": "PDF escaneado; el registro de instancias exige autorización ministerial previa"
+      "cautela": "PDF escaneado; el registro de instancias exige autorización ministerial previa",
+      "nivel": "N2",
+      "estadoVerificacion": "Evidencia secundaria/técnica o copia pendiente de contraste oficial y vigencia",
+      "copiaLocal": "fuentes/ley-inces-2014-oficial.pdf",
+      "sha256Copia": "f2feacaf4ba987faada9ad804bb9be7c7ce3f20da062bf5566824f23ec9da593"
     },
     {
       "id": "cnu1999",
@@ -151,7 +167,11 @@ window.DATOS = {
       "gaceta": "G.O. 36.847",
       "url": "https://cnu.gob.ve/",
       "uso": "Ruta de creación de IES: estudio de factibilidad, estudio académico, plazos",
-      "cautela": "Solo aplica si se decide crear una IES; no para capacitación no formal"
+      "cautela": "Solo aplica si se decide crear una IES; no para capacitación no formal",
+      "nivel": "N2",
+      "estadoVerificacion": "Evidencia secundaria/técnica o copia pendiente de contraste oficial y vigencia",
+      "copiaLocal": "fuentes/cnu-instructivo-creacion-ies.pdf",
+      "sha256Copia": "7100442335d0b38ba15183e3f024c62b3ca21c9e5ca8dd22db4f2b37e49642e8"
     },
     {
       "id": "leyuniversidades",
@@ -162,7 +182,9 @@ window.DATOS = {
       "gaceta": "G.O. 1.429 Extraordinario",
       "url": "https://www.tsj.gob.ve/",
       "uso": "Autonomía, educación continua y potestad de las IES para emitir credenciales",
-      "cautela": "Verificar reglamentos internos de cada IES"
+      "cautela": "Verificar reglamentos internos de cada IES",
+      "nivel": "N2",
+      "estadoVerificacion": "Evidencia secundaria/técnica o copia pendiente de contraste oficial y vigencia"
     },
     {
       "id": "lopcymat",
@@ -173,7 +195,9 @@ window.DATOS = {
       "gaceta": "G.O. 38.236; Reglamento G.O. 38.596 (2007)",
       "url": "https://www.inpsasel.gob.ve/",
       "uso": "Formación obligatoria de delegados de prevención y programa de SST",
-      "cautela": "Verificar horas exigidas en el programa de SST de cada entidad de trabajo"
+      "cautela": "Verificar horas exigidas en el programa de SST de cada entidad de trabajo",
+      "nivel": "N2",
+      "estadoVerificacion": "Evidencia secundaria/técnica o copia pendiente de contraste oficial y vigencia"
     },
     {
       "id": "lottt",
@@ -184,7 +208,9 @@ window.DATOS = {
       "gaceta": "G.O. 6.076 Extraordinario",
       "url": "https://www.mppt.gob.ve/",
       "uso": "Relación laboral, aprendices, capacitación y contratación de facilitadores",
-      "cautela": "Revisar reformas posteriores"
+      "cautela": "Revisar reformas posteriores",
+      "nivel": "N2",
+      "estadoVerificacion": "Evidencia secundaria/técnica o copia pendiente de contraste oficial y vigencia"
     },
     {
       "id": "contrataciones",
@@ -195,7 +221,9 @@ window.DATOS = {
       "gaceta": "G.O. 6.154 Extraordinario",
       "url": "https://www.snc.gob.ve/",
       "uso": "Registro Nacional de Contratistas y solvencia para vender al Estado",
-      "cautela": "Verificar el reglamento vigente y los montos de umbral"
+      "cautela": "Verificar el reglamento vigente y los montos de umbral",
+      "nivel": "N2",
+      "estadoVerificacion": "Evidencia secundaria/técnica o copia pendiente de contraste oficial y vigencia"
     },
     {
       "id": "firmas",
@@ -206,7 +234,9 @@ window.DATOS = {
       "gaceta": "G.O. 37.148",
       "url": "https://www.tsj.gob.ve/",
       "uso": "Validez de certificados y documentos electrónicos verificables",
-      "cautela": "Usar prestador de servicios de certificación registrado"
+      "cautela": "Usar prestador de servicios de certificación registrado",
+      "nivel": "N2",
+      "estadoVerificacion": "Evidencia secundaria/técnica o copia pendiente de contraste oficial y vigencia"
     },
     {
       "id": "iso17024",
@@ -217,7 +247,9 @@ window.DATOS = {
       "gaceta": "No aplica",
       "url": "https://www.iso.org/standard/52993.html",
       "uso": "Diseño del esquema de certificación, imparcialidad, examen y recertificación",
-      "cautela": "Es norma técnica voluntaria; la acreditación la otorga SENCAMER u otro acreditador"
+      "cautela": "Es norma técnica voluntaria; la acreditación la otorga SENCAMER u otro acreditador",
+      "nivel": "N2",
+      "estadoVerificacion": "Evidencia secundaria/técnica o copia pendiente de contraste oficial y vigencia"
     },
     {
       "id": "sencamer",
@@ -228,7 +260,9 @@ window.DATOS = {
       "gaceta": "No aplica",
       "url": "https://www.sencamer.gob.ve/",
       "uso": "Ruta de acreditación de organismos de certificación de personas",
-      "cautela": "Confirmar alcance, tarifas y tiempos actuales por escrito"
+      "cautela": "Confirmar alcance, tarifas y tiempos actuales por escrito",
+      "nivel": "N4",
+      "estadoVerificacion": "Referencia general o hipótesis de alcance; confirmación institucional pendiente"
     },
     {
       "id": "covenin",
@@ -239,7 +273,9 @@ window.DATOS = {
       "gaceta": "No aplica",
       "url": "https://www.fondonorma.org.ve/",
       "uso": "Referencia técnica de los contenidos y de las pruebas prácticas",
-      "cautela": "Verificar la vigencia de cada norma antes de citarla en un programa"
+      "cautela": "Verificar la vigencia de cada norma antes de citarla en un programa",
+      "nivel": "N4",
+      "estadoVerificacion": "Referencia general o hipótesis de alcance; confirmación institucional pendiente"
     },
     {
       "id": "cine",
@@ -250,7 +286,9 @@ window.DATOS = {
       "gaceta": "No aplica",
       "url": "https://uis.unesco.org/es/topic/international-standard-classification-of-education-isced",
       "uso": "Equivalencias internacionales de niveles y tipos de certificación",
-      "cautela": "Útil para comparar con Colombia, no para fundar obligaciones en Venezuela"
+      "cautela": "Útil para comparar con Colombia, no para fundar obligaciones en Venezuela",
+      "nivel": "N2",
+      "estadoVerificacion": "Evidencia secundaria/técnica o copia pendiente de contraste oficial y vigencia"
     },
     {
       "id": "oit",
@@ -261,7 +299,9 @@ window.DATOS = {
       "gaceta": "No aplica",
       "url": "https://www.ilo.org/",
       "uso": "Contexto de informalidad y demanda de cualificaciones",
-      "cautela": "Los datos de Venezuela son fragmentarios; usar como marco, no como cifra local"
+      "cautela": "Los datos de Venezuela son fragmentarios; usar como marco, no como cifra local",
+      "nivel": "N4",
+      "estadoVerificacion": "Referencia general o hipótesis de alcance; confirmación institucional pendiente"
     },
     {
       "id": "ine",
@@ -272,7 +312,9 @@ window.DATOS = {
       "gaceta": "No aplica",
       "url": "https://www.ine.gob.ve/",
       "uso": "Ocupación, informalidad rama de actividad en Caracas",
-      "cautela": "Verificar la última publicación disponible y su cobertura"
+      "cautela": "Verificar la última publicación disponible y su cobertura",
+      "nivel": "N4",
+      "estadoVerificacion": "Referencia general o hipótesis de alcance; confirmación institucional pendiente"
     },
     {
       "id": "consumidor",
@@ -283,7 +325,9 @@ window.DATOS = {
       "gaceta": "Verificar G.O.",
       "url": "https://www.sundde.gob.ve/",
       "uso": "Publicidad, información veraz, condiciones contractuales y reembolsos",
-      "cautela": "Confirmar número de Gaceta y reformas"
+      "cautela": "Confirmar número de Gaceta y reformas",
+      "nivel": "N2",
+      "estadoVerificacion": "Evidencia secundaria/técnica o copia pendiente de contraste oficial y vigencia"
     },
     {
       "id": "comercio",
@@ -294,7 +338,9 @@ window.DATOS = {
       "gaceta": "G.O. Extraordinario 475",
       "url": "https://www.tsj.gob.ve/",
       "uso": "Constitución de sociedades, registro mercantil y obligaciones contables",
-      "cautela": "Verificar reformas y tasas registrales vigentes"
+      "cautela": "Verificar reformas y tasas registrales vigentes",
+      "nivel": "N2",
+      "estadoVerificacion": "Evidencia secundaria/técnica o copia pendiente de contraste oficial y vigencia"
     },
     {
       "id": "propiedad",
@@ -305,7 +351,9 @@ window.DATOS = {
       "gaceta": "Verificar G.O.",
       "url": "https://www.sapi.gob.ve/",
       "uso": "Registro de marca, lemas y nombres comerciales",
-      "cautela": "El registro tarda meses; iniciar antes del lanzamiento"
+      "cautela": "El registro tarda meses; iniciar antes del lanzamiento",
+      "nivel": "N2",
+      "estadoVerificacion": "Evidencia secundaria/técnica o copia pendiente de contraste oficial y vigencia"
     }
   ],
   "programas": {
@@ -1167,7 +1215,7 @@ window.DATOS = {
         "precioPromedioUSD": 220,
         "costoVariableUSD": 55,
         "costoFijoAnualUSD": 72000,
-        "nota": "B2C + 3 contratos B2B, aval firmado"
+        "nota": "Supuesto agregado: B2C + 3 contratos B2B y aval firmado; no es demanda observada"
       },
       {
         "id": "optimista",
@@ -1177,7 +1225,48 @@ window.DATOS = {
         "precioPromedioUSD": 240,
         "costoVariableUSD": 55,
         "costoFijoAnualUSD": 95000,
-        "nota": "B2B recurrente + INCES + segunda ciudad"
+        "nota": "Supuesto: B2B recurrente + INCES + segunda ciudad"
+      }
+    ],
+    "modeloB2B": {
+      "estado": "Referencia N4 por validar con cotizaciones y contratos; no es un margen observado",
+      "contratosBase": 3,
+      "alumnosPorContrato": 25,
+      "horasPorContrato": 80,
+      "facilitadoresPorContrato": 1,
+      "horasPracticaPresencial": 24,
+      "precioPorAlumnoUSD": 140,
+      "precioContratoUSD": 3500,
+      "costoVariableAlumnoUSD": 55,
+      "comisionCobroIncluida": true,
+      "contribucionContratoUSD": 2125,
+      "condicionCobro": "50 % de anticipo y saldo contra entrega; el costo variable incluye facilitación, materiales, práctica, comisión y cobro",
+      "nota": "Los tres contratos representan 75 de los 528 alumnos base. No se suman otra vez al resultado agregado."
+    },
+    "flujoCaja": [
+      {
+        "trimestre": "T1",
+        "inscripciones": 40,
+        "ingresos": 8800,
+        "egresos": 20200
+      },
+      {
+        "trimestre": "T2",
+        "inscripciones": 110,
+        "ingresos": 24200,
+        "egresos": 24050
+      },
+      {
+        "trimestre": "T3",
+        "inscripciones": 160,
+        "ingresos": 35200,
+        "egresos": 26800
+      },
+      {
+        "trimestre": "T4",
+        "inscripciones": 218,
+        "ingresos": 47960,
+        "egresos": 29990
       }
     ]
   }

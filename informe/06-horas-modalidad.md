@@ -8,14 +8,14 @@
 
 | Ámbito | Regla | Fuente | Nivel |
 |---|---|---|---|
-| Educación media técnica | Plan de estudios oficial de seis años | MPPE / LOE | N1 |
+| Educación media técnica | Plan de estudios oficial de seis años | MPPE / LOE; texto oficial pendiente de contraste | N2 |
 | Educación universitaria | Créditos académicos y horas por asignatura | Reglamentos de cada IES | N2 |
-| Diplomados de educación continua | Estándar institucional de 120-200 h y 75 % de asistencia | Reglamentos de las IES | N2 |
-| Formación de delegados de prevención | Horas definidas en el programa de SST | LOPCYMAT y su reglamento | N1-N2 |
-| Aprendices INCES | Participación no superior a seis meses | Ley del INCES, art. 35 | N1 |
-| Certificación de competencias | No se mide en horas sino en evidencias | Ley del INCES, art. 22 | N1 |
+| Diplomados de educación continua | Duración y asistencia según el programa; las referencias de 120-200 h y 75 % no son una regla nacional general | Reglamento de cada IES; art. 109 histórico corresponde a educación escolar | N2 |
+| Formación de delegados de prevención | Horas definidas en el programa de SST | LOPCYMAT y su reglamento; numeración pendiente | N2 |
+| Aprendices INCES | Participación no superior a seis meses | Ley del INCES, art. 35; copia pendiente de contraste | N2 |
+| Certificación de competencias | No se mide en horas sino en evidencias | Ley del INCES, art. 22; copia pendiente de contraste | N2 |
 
-> **Conclusión operativa.** Para un curso de oficios, la carga horaria es una **decisión de diseño**, no una imposición legal. Pero esa libertad obliga a justificar cada hora con resultados de aprendizaje y evidencia.
+> **Conclusión operativa.** En las fuentes revisadas no se identificó una carga horaria nacional general para cursos no formales de adultos. La duración debe justificarse con resultados de aprendizaje y evidencia; los programas formales, universitarios o sectoriales sí deben cumplir sus reglas específicas verificadas.
 
 ## 6.2 Tres unidades que no son lo mismo
 
@@ -54,9 +54,9 @@ Esta tabla es la herramienta más útil para el equipo comercial: evita vender "
 
 ## 6.5 El famoso 75 %: cómo usarlo sin mentir
 
-El 75 % de asistencia es un estándar de **educación continua universitaria**, no una ley nacional. Se puede usar de tres maneras legítimas:
+El 75 % tiene dos contextos que no deben mezclarse. El **art. 109 del Reglamento General de la LOE de 1999** fijó 75 % de asistencia para la educación básica escolar, bajo un reglamento histórico vinculado a la LOE de 1980. Las IES pueden establecer sus propios mínimos de asistencia para educación continua. Ninguno de esos antecedentes prueba por sí solo una regla nacional para cursos no formales de adultos. Se puede usar de tres maneras legítimas:
 
-1. **Como referencia de diseño:** "adoptamos el estándar de 75 % que usan las universidades para educación continua".
+1. **Como referencia de diseño:** "adoptamos 75 % como regla contractual de asistencia", sin atribuirla a una ley ni a una universidad cuyo reglamento no se haya verificado.
 2. **Como regla contractual:** si el avalista lo exige, se incorpora al reglamento del curso.
 3. **Como criterio de certificación propia:** la empresa puede exigir 75 % de asistencia y 100 % de evidencias, y decirlo con transparencia.
 

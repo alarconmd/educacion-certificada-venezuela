@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'" />
 <title>Educación certificada para oficios · Venezuela</title>
 <meta name="description" content="Explorador interactivo de figuras certificables, oficios, permisos, viajes y economía para una empresa de formación laboral en Venezuela." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2312355b'/%3E%3Ctext x='32' y='42' font-size='28' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EVE%3C/text%3E%3C/svg%3E" />
@@ -79,9 +80,10 @@
       </select>
     </label>
 
-    <label>Presupuesto (USD)
-      <input id="c-presupuesto" type="number" min="0" max="2000" step="10" value="220" />
+    <label>Presupuesto disponible (USD)
+      <input id="c-presupuesto" type="number" min="0" max="60000" step="10" value="220" />
     </label>
+    <p class="hint">Precio por participante al comparar programas; capital total de entrada solo para el perfil fundador.</p>
 
     <label class="check"><input id="c-oficial" type="checkbox" /> Necesito una credencial con valor oficial</label>
     <label class="check"><input id="c-practica" type="checkbox" checked /> Puedo asistir a práctica presencial</label>
@@ -113,12 +115,13 @@
 
 <footer class="foot">
   <p><strong>Aviso:</strong> herramienta de exploración estratégica. No sustituye opinión jurídica ni pronunciamiento de autoridad. Las cifras son hipótesis paramétricas.</p>
-  <p>Fuente de datos: <code>datos/*.json</code> · Informe completo en PDF · Versión 1.0</p>
+  <p><strong>Compuerta:</strong> el primer curso no formal permanece condicionado a las verificaciones jurídicas 1, 2, 4 y 10.</p>
+  <p>Fuente de datos: <code>datos/*.json</code> · Informe completo en PDF · Versión 1.1 · Remediación adversarial</p>
 </footer>
 
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-<script src="assets/data.js?v=3"></script>
-<script src="assets/app.js?v=3"></script>
+<script src="assets/data.js?v=4"></script>
+<script src="assets/app.js?v=4"></script>
 </body>
 </html>

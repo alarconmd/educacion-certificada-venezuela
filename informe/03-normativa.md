@@ -156,20 +156,20 @@ Una empresa puede adoptar un esquema **alineado a 17024** sin estar acreditada, 
 
 ## 3.12 Lo que no está regulado (y por qué importa)
 
-No hay norma nacional que fije horas mínimas para un curso de oficios, porcentaje de presencialidad para capacitación no formal, requisitos de infraestructura para talleres privados de adultos ni un registro obligatorio de certificados privados.
+La revisión documental no identificó una norma nacional general que fije horas mínimas para un curso no formal de oficios, porcentaje de presencialidad para capacitación de adultos, requisitos específicos de infraestructura para todos los talleres privados ni un registro general de constancias privadas. Esta conclusión es acotada a las fuentes revisadas y no sustituye la consulta sobre el alcance de la Resolución 1791, las normas sectoriales ni las ordenanzas.
 
-Eso no significa "todo vale". Significa que **el estándar lo pone el mercado**: el empleador que contrata, el gremio que avala y el auditor que revisa. La estrategia debe sustituir la norma ausente por **evidencia verificable**: rúbricas, portafolio, evaluación de desempeño y verificación pública.
+Eso no significa "todo vale" ni que el mercado sea la única fuente de obligaciones. Significa que, mientras se completan las verificaciones jurídicas, el diseño debe aportar **evidencia verificable**: rúbricas, portafolio, evaluación de desempeño y verificación pública. La compuerta legal sigue siendo previa a cualquier oferta.
 
 ## 3.13 Tabla de trazabilidad: de la norma a la decisión
 
 | Decisión de negocio | Norma aplicable | Nivel | Qué hacer |
 |---|---|---|---|
-| Llamar "curso" al producto | CRBV 112; LOE (silencio sobre adultos) | N1 | Sí, sin restricción |
-| Emitir constancia de participación | Libertad contractual | N1 | Sí, con criterios explícitos |
-| Emitir "certificado de competencia" | ISO 17024 (referencia); INCES art. 22 | N2 | Solo con esquema y aval |
-| Abrir sede con talleres | Resolución 1791 (si ámbito escolar); ordenanzas | N1 | Consultar uso del suelo y bomberos |
-| Dictar curso a menores en edad escolar | Resolución 1791 | N1 | Requiere autorización |
-| Usar la palabra "INCES" | Ley del INCES art. 25 | N1 | Prohibido hasta estar registrado |
-| Prometer empleo | Resolución 1791 art. 19.3 | N1 | Prohibido siempre |
-| Vender al Estado | Ley de Contrataciones Públicas | N1 | RNP + solvencia |
+| Llamar "curso" al producto | CRBV 112; alcance LOE/Resolución 1791 pendiente | N2 | En principio posible para adultos, sujeto a dictamen y consulta de Zona Educativa |
+| Emitir constancia de participación | Libertad contractual y deber de información veraz | N2 | Usar criterios explícitos y no equipararla a título o certificación oficial |
+| Emitir "certificado de competencia" | ISO 17024 (referencia); INCES art. 22 | N2 | Solo con esquema y aval cuyo alcance se haya verificado |
+| Abrir sede con talleres | Resolución 1791 (si ámbito escolar); ordenanzas | N2 | Consultar uso del suelo, bomberos y alcance educativo |
+| Dictar curso a menores en edad escolar | Resolución 1791 | N2 | Requiere autorización; no usar la ruta no formal de adultos |
+| Usar la palabra "INCES" | Ley del INCES art. 25; publicidad y denominaciones | N2 | No afirmar aval o registro inexistente; una referencia veraz no equivale a autorización |
+| Prometer empleo | Resolución 1791 art. 19.3 en su ámbito; deber de publicidad veraz | N2 | No prometer colocación inmediata; confirmar el alcance específico antes del guion comercial |
+| Vender al Estado | Ley de Contrataciones Públicas | N2 | RNP + solvencia |
 

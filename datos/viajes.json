@@ -24,7 +24,28 @@
   ],
   "escenarios": [
     {"id":"pesimista","nombre":"Pesimista","cohortesAnio":12,"alumnosPorCohorte":15,"precioPromedioUSD":200,"costoVariableUSD":55,"costoFijoAnualUSD":66000,"nota":"Solo B2C, sin aval, una sola ciudad"},
-    {"id":"base","nombre":"Base","cohortesAnio":24,"alumnosPorCohorte":22,"precioPromedioUSD":220,"costoVariableUSD":55,"costoFijoAnualUSD":72000,"nota":"B2C + 3 contratos B2B, aval firmado"},
-    {"id":"optimista","nombre":"Optimista","cohortesAnio":36,"alumnosPorCohorte":25,"precioPromedioUSD":240,"costoVariableUSD":55,"costoFijoAnualUSD":95000,"nota":"B2B recurrente + INCES + segunda ciudad"}
+    {"id":"base","nombre":"Base","cohortesAnio":24,"alumnosPorCohorte":22,"precioPromedioUSD":220,"costoVariableUSD":55,"costoFijoAnualUSD":72000,"nota":"Supuesto agregado: B2C + 3 contratos B2B y aval firmado; no es demanda observada"},
+    {"id":"optimista","nombre":"Optimista","cohortesAnio":36,"alumnosPorCohorte":25,"precioPromedioUSD":240,"costoVariableUSD":55,"costoFijoAnualUSD":95000,"nota":"Supuesto: B2B recurrente + INCES + segunda ciudad"}
+  ],
+  "modeloB2B": {
+    "estado": "Referencia N4 por validar con cotizaciones y contratos; no es un margen observado",
+    "contratosBase": 3,
+    "alumnosPorContrato": 25,
+    "horasPorContrato": 80,
+    "facilitadoresPorContrato": 1,
+    "horasPracticaPresencial": 24,
+    "precioPorAlumnoUSD": 140,
+    "precioContratoUSD": 3500,
+    "costoVariableAlumnoUSD": 55,
+    "comisionCobroIncluida": true,
+    "contribucionContratoUSD": 2125,
+    "condicionCobro": "50 % de anticipo y saldo contra entrega; el costo variable incluye facilitación, materiales, práctica, comisión y cobro",
+    "nota": "Los tres contratos representan 75 de los 528 alumnos base. No se suman otra vez al resultado agregado."
+  },
+  "flujoCaja": [
+    {"trimestre":"T1","inscripciones":40,"ingresos":8800,"egresos":20200},
+    {"trimestre":"T2","inscripciones":110,"ingresos":24200,"egresos":24050},
+    {"trimestre":"T3","inscripciones":160,"ingresos":35200,"egresos":26800},
+    {"trimestre":"T4","inscripciones":218,"ingresos":47960,"egresos":29990}
   ]
 }

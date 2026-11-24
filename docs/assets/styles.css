@@ -110,6 +110,8 @@ button:hover,.btn:hover{border-color:var(--navy)}
 .card .sub{font-size:11.5px;color:var(--muted)}
 .card.click{cursor:pointer;transition:.15s}
 .card.click:hover{transform:translateY(-2px);border-color:var(--navy)}
+.card.click:focus-visible,.btn-link:focus-visible,button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.btn-link{border:0;background:transparent;color:var(--navy);padding:0;display:inline;font-weight:700;text-align:left;text-decoration:underline;text-underline-offset:2px}
 .card.sel{outline:2px solid var(--navy);outline-offset:1px}
 
 .kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}

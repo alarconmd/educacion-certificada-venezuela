@@ -32,14 +32,14 @@ Si un proceso no tiene dueño, no existe. Si no tiene registro, no se puede audi
 
 Un certificado confiable tiene seis componentes:
 
-1. **Identificador único:** patrón legible, por ejemplo `VE-ELEC-2026-000123`.
-2. **Hash del documento:** SHA-256 del PDF para detectar alteraciones.
-3. **Código QR:** apunta a `https://dominio/verificar/VE-ELEC-2026-000123`.
-4. **Endpoint público:** devuelve nombre, curso, horas, fecha, estado y hash.
-5. **Estado:** vigente, revocado, vencido.
-6. **Firma:** digital del responsable académico, conforme a la Ley de Mensajes de Datos y Firmas Electrónicas.
+1. **Identificador único no enumerable:** generado con entropía criptográfica y sin exponer consecutivos de matrícula. El patrón secuencial `VE-ELEC-2026-000123` se reserva a datos ficticios de demostración, no a producción.
+2. **Huella del documento:** SHA-256 calculado sobre el PDF efectivamente emitido, almacenado con sello de tiempo; un hash del nombre o código no sirve.
+3. **Código QR:** apunta al identificador aleatorio en `https://dominio/verificar/<id>`.
+4. **Endpoint público:** devuelve nombre, curso, horas, fecha, estado y huella; limita tasa, registra abuso y aplica minimización/consentimiento. Los desconocidos reciben respuesta genérica; un certificado conocido revocado debe mostrar su revocación, motivo y fecha.
+5. **Estado:** vigente, revocado o vencido, con fecha y motivo cuando corresponda.
+6. **Firma:** digital del responsable académico, conforme al régimen aplicable de mensajes de datos y firmas electrónicas cuya vigencia se haya verificado.
 
-**Regla de privacidad:** el verificador público no debe exponer cédula completa, correo ni teléfono. Muestra nombre, curso, horas, fecha y estado; el resto se confirma con consentimiento.
+**Regla de privacidad:** el verificador público no debe exponer cédula completa, correo ni teléfono. Muestra solo los datos necesarios y cuenta con base/consentimiento para publicarlos; el resto se confirma por un canal autorizado. La validación de formato no sustituye identificadores aleatorios, límites de tasa ni controles contra enumeración.
 
 ## 10.4 Arquitectura de datos
 

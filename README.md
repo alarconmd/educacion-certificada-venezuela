@@ -31,10 +31,15 @@ salida/             PDF generado
 ## Regenerar
 
 ```powershell
-python build/validate.py       # valida los JSON y corrige erratas conocidas
 python build/build_pdf.py      # genera salida/informe-educacion-certificada-venezuela.pdf
 python build/build_data.py     # genera docs/assets/data.js y copia el PDF a docs/
+python build/validate.py       # validación no destructiva de datos, informe, JS y generados
+node --check docs/assets/app.js
+node build/tools/test_state.js  # regresión hostil del estado, sin dependencias
 ```
+
+La ruta antigua `build/tools/validate.py` solo es un alias de compatibilidad. El validador no modifica fuentes.
+La plantilla `build/ci/validate.yml` puede copiarse a `.github/workflows/validate.yml` para activar la misma compuerta en GitHub Actions; publicar ese archivo requiere un token con permiso `workflow`.
 
 Para ver el sitio en local:
 
@@ -51,9 +56,9 @@ No requiere compilación ni dependencias: HTML, CSS y JavaScript sin frameworks.
 ## Advertencia
 
 Este trabajo es un instrumento de decisión, **no un dictamen jurídico**. Distingue niveles de evidencia
-(N1 norma verificada, N2 acto institucional, N3 práctica administrativa, N4 hipótesis) y enumera diez
-verificaciones pendientes antes de operar. La normativa venezolana cambia por gacetas y providencias:
-confirme la vigencia antes de cada lanzamiento.
+(N1 instrumento primario con texto oficial y vigencia contrastados, N2 evidencia secundaria/técnica o copia pendiente de contraste,
+N3 práctica administrativa y N4 hipótesis) y enumera diez verificaciones pendientes antes de operar.
+La normativa venezolana cambia por gacetas y providencias: confirme la vigencia antes de cada lanzamiento.
 
 ## Licencia
 

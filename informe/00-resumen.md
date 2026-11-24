@@ -2,7 +2,7 @@
 
 ## La respuesta corta
 
-Sí es posible construir en Venezuela un negocio de formación certificada para oficios con estándares que resistan una auditoría de recursos humanos, **pero no a través de la figura de "institución educativa"**. La ruta viable y rápida es una **empresa de capacitación laboral no formal** que, en una segunda capa, obtiene **aval institucional** (universidad, gremio o INCES) y, en una tercera, busca **certificación de competencias** con valor en el sector público.
+Sí es posible explorar en Venezuela un negocio de formación para oficios con estándares que resistan una auditoría de recursos humanos, **sin constituirlo inicialmente como institución educativa**. La ruta a validar es una **empresa de capacitación laboral no formal** que, en una segunda capa, obtiene **aval institucional** (universidad, gremio o INCES) y, en una tercera, busca **certificación de competencias**. El primer piloto queda **condicionado a dictamen jurídico independiente y consulta escrita a la Zona Educativa** sobre el alcance de la LOE y la Resolución 1791; la revisión documental no equivale a un permiso ni a una autorización de lanzamiento.
 
 La diferencia con Colombia es estructural: Colombia tiene una arquitectura explícita de "educación para el trabajo y el desarrollo humano" con horas mínimas, ciclos y registro de programas. **Venezuela no tiene un equivalente nacional para la formación ocupacional de adultos.** Eso significa dos cosas a la vez: menos barreras de entrada y **menos señales públicas de legitimidad**. El negocio no se gana con el permiso, se gana con la **prueba de que el certificado sirve para trabajar**.
 
@@ -10,7 +10,7 @@ La diferencia con Colombia es estructural: Colombia tiene una arquitectura expl�
 
 ## Los ocho hallazgos que cambian el diseño
 
-1. **No existe una regla nacional de horas mínimas para cursos de oficios.** El estándar de "120 a 200 horas y 75 % de asistencia" que circula en Venezuela proviene de **reglamentos institucionales de educación continua y diplomados universitarios**, no de una ley. Venderlo como obligación legal es un error que desgasta credibilidad ante un cliente corporativo informado.
+1. **No se identificó una regla nacional general de horas mínimas para cursos no formales de oficios.** Las referencias de "120 a 200 horas" y "75 % de asistencia" aparecen en contextos distintos: el art. 109 del Reglamento General de la LOE de 1999 fijó 75 % para asistencia en la **educación escolar básica**, bajo un reglamento histórico; los reglamentos de educación continua de cada IES pueden adoptar sus propios mínimos. Ninguno de esos textos demuestra una obligación general para capacitación ocupacional de adultos. Deben verificarse por separado y no venderse como una regla nacional unificada.
 2. **La Resolución 1791/1998 sí regula "cátedras y servicios educativos privados"**, pero está anclada a la educación básica y media: habla de planteles, de planes de estudio oficiales y de alumnos en edad escolar. Un curso de oficios para adultos fuera de ese ámbito no encaja naturalmente, aunque la definición de "cátedra" es lo bastante amplia como para que una Zona Educativa intente atraerlo. **La zona gris debe cerrarse por escrito, no por interpretación propia.**
 3. **La misma resolución prohíbe dos cosas que la mayoría de los emprendedores hace sin saberlo:** prometer colocación laboral inmediata (art. 19.3) y ofrecer títulos o certificados no autorizados (art. 19.4). Esas dos prohibiciones son el verdadero riesgo reputacional y legal del modelo.
 4. **El INCES es la palanca de legitimidad más potente y más subestimada.** Su ley vigente (2014) permite acreditar y certificar saberes (art. 22) y dice expresamente que esas certificaciones **tienen valor para el ingreso, ascenso y evaluación en el proceso social de trabajo** (art. 24). Es la única norma venezolana que conecta una credencial con la carrera laboral formal.
@@ -41,7 +41,7 @@ La capa 1 no es un "modelo barato": es el **laboratorio** donde se mide finaliza
 
 | Hito | Mes | Resultado verificable | Puerta que abre |
 |---|---|---|---|
-| H1 | 2 | 2 programas piloto, 1 empresa ancla, dictamen legal | Operación no formal |
+| H1 | 2 | 2 programas piloto listos, 1 empresa ancla en validación, dictamen legal y consulta de Zona Educativa | Decisión documentada sobre operación no formal |
 | H2 | 5 | 60 egresados, verificador público, 85 % de finalización | Evidencia para negociar aval |
 | H3 | 9 | Convenio de aval firmado y 3 contratos B2B | Margen y reputación |
 | H4 | 12 | Expediente INCES radicado y primer curso con certificación de competencias | Mercado público |
@@ -52,7 +52,7 @@ Con los escenarios del capítulo 11: la operación base requiere **USD 72.000 an
 
 ## Advertencia metodológica
 
-Este informe distingue cuatro niveles de evidencia: **N1** norma vigente verificada en texto; **N2** acto institucional o instructivo de autoridad; **N3** práctica administrativa observada, no publicada; **N4** hipótesis a validar. Cada afirmación relevante lleva su nivel. Donde la norma no existe, el informe lo dice; donde es ambigua, propone la consulta formal y el texto exacto para hacerla.
+Este informe distingue cuatro niveles de evidencia: **N1** instrumento primario con texto oficial, vigencia y pasaje contrastados; **N2** evidencia secundaria, técnica o institucional, incluida una copia jurídica pendiente de contraste oficial; **N3** práctica administrativa observada, no publicada; **N4** hipótesis a validar. El nivel describe la verificación disponible, no solo la jerarquía del instrumento. Las fuentes marcadas N2 no sustentan por sí solas una autorización categórica de lanzamiento; donde existe ambigüedad se propone consulta formal.
 
 ## Cómo leer este informe
 

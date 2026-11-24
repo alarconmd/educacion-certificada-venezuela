@@ -1,5 +1,7 @@
 # Revisión adversarial del informe
 
+> **Nota de trazabilidad — versión 1.1 (24/11/2026).** La auditoría independiente posterior encontró que varias frases “cambio aplicado” de esta revisión eran prematuras en el commit `88f45a6`: el PDF conservaba errores y la interfaz tenía un XSS explotable. Este documento se conserva como registro histórico, no como prueba de cierre. La remediación efectiva y sus pruebas constan en `revision/auditoria-adversarial-2026-11-24.md`, sección “Remediación aplicada en la versión 1.1”. Las verificaciones jurídicas externas siguen abiertas.
+
 **Propósito.** Este documento somete el informe a un ataque estructurado antes de su publicación. No busca validar: busca encontrar el punto donde el informe falla, exagera o calla. Cada ataque se responde con evidencia o se corrige el informe.
 
 **Método.** 24 ataques en seis frentes: jurídico, de mercado, financiero, operativo, ético y metodológico. Cada uno con: (1) el ataque en su versión más fuerte, (2) la evidencia disponible, (3) la respuesta, (4) el cambio aplicado.

@@ -25,22 +25,22 @@
 
 | Fuente | Identificación | Nivel | Enlace |
 |---|---|---|---|
-| Constitución de la República Bolivariana de Venezuela | G.O. 36.860 (1999); enmienda 5.908 Ext. (2009) | N1 | https://www.tsj.gob.ve/ |
-| Ley Orgánica de Educación | G.O. 5.929 Ext. (15/08/2009) | N1 | https://www.asambleanacional.gob.ve/storage/documentos/leyes/ley-organi-20220131130620.pdf |
-| Resolución 1791/1998 | G.O. 36.566 (23/10/1998) | N1 | https://pandectasdigital.blogspot.com/2018/08/regimen-sobre-autorizacion-y.html |
-| Reglamento General de la LOE | G.O. 36.787 (15/09/1999) | N1 histórico | https://venezuela.justia.com/federales/reglamentos/reglamento-general-de-la-ley-organica-de-educacion/ |
-| Ley del INCES | G.O. 6.155 Ext. (19/11/2014) | N1 | https://www.asambleanacional.gob.ve/storage/documentos/leyes/decreto-1414-mediante-el-cual-se-dicta-el-decreto-con-rango-valor-y-fuerza-de-ley-del-instituto-nacional-de-capacitacion-y-educacion-socialista-20211103124657.pdf |
+| Constitución de la República Bolivariana de Venezuela | G.O. 36.860 (1999); enmienda 5.908 Ext. (2009) | N2 | https://www.tsj.gob.ve/ |
+| Ley Orgánica de Educación | G.O. 5.929 Ext. (15/08/2009) | N2 | https://www.asambleanacional.gob.ve/storage/documentos/leyes/ley-organi-20220131130620.pdf |
+| Resolución 1791/1998 | G.O. 36.566 (23/10/1998) | N2 | https://pandectasdigital.blogspot.com/2018/08/regimen-sobre-autorizacion-y.html |
+| Reglamento General de la LOE | G.O. 36.787 (15/09/1999) | N2 histórico | https://venezuela.justia.com/federales/reglamentos/reglamento-general-de-la-ley-organica-de-educacion/ |
+| Ley del INCES | G.O. 6.155 Ext. (19/11/2014) | N2 | https://www.asambleanacional.gob.ve/storage/documentos/leyes/decreto-1414-mediante-el-cual-se-dicta-el-decreto-con-rango-valor-y-fuerza-de-ley-del-instituto-nacional-de-capacitacion-y-educacion-socialista-20211103124657.pdf |
 | Instructivo CNU | G.O. 36.847 (09/12/1999) | N2 | https://cnu.gob.ve/ |
-| Ley de Universidades | G.O. 1.429 Ext. (08/09/1970) | N1 | https://www.tsj.gob.ve/ |
-| LOPCYMAT | G.O. 38.236 (2005); Reglamento 38.596 (2007) | N1 | https://www.inpsasel.gob.ve/ |
-| LOTTT | G.O. 6.076 Ext. (2012) | N1 | https://www.mppt.gob.ve/ |
-| Ley de Contrataciones Públicas | G.O. 6.154 Ext. (2014) | N1 | https://www.snc.gob.ve/ |
-| Ley de Mensajes de Datos y Firmas Electrónicas | G.O. 37.148 (2001) | N1 | https://www.tsj.gob.ve/ |
+| Ley de Universidades | G.O. 1.429 Ext. (08/09/1970) | N2 | https://www.tsj.gob.ve/ |
+| LOPCYMAT | G.O. 38.236 (2005); Reglamento 38.596 (2007) | N2 | https://www.inpsasel.gob.ve/ |
+| LOTTT | G.O. 6.076 Ext. (2012) | N2 | https://www.mppt.gob.ve/ |
+| Ley de Contrataciones Públicas | G.O. 6.154 Ext. (2014) | N2 | https://www.snc.gob.ve/ |
+| Ley de Mensajes de Datos y Firmas Electrónicas | G.O. 37.148 (2001) | N2 | https://www.tsj.gob.ve/ |
 | ISO/IEC 17024:2012 | Norma técnica | N2 | https://www.iso.org/standard/52993.html |
 | SENCAMER | Acreditación | N2 | https://www.sencamer.gob.ve/ |
 | CINE 2011 | UNESCO | N2 | https://uis.unesco.org/es/topic/international-standard-classification-of-education-isced |
 
-**Nota:** los enlaces se verificaron al cierre de este informe. Antes de citarlos en un escrito administrativo o judicial, confirmar la Gaceta y la vigencia.
+**Nota de trazabilidad:** se registran URL e identificación del instrumento, pero no todos los textos fueron contrastados directamente con una Gaceta oficial ni se verificó la vigencia de cada pasaje. Por ello las copias pendientes figuran como N2. Las rutas y huellas SHA-256 de las copias locales disponibles constan en `datos/fuentes.json`; antes de un escrito administrativo, judicial o decisión de lanzamiento deben completarse esas comprobaciones.
 
 ## Anexo C — Checklists
 

@@ -122,9 +122,10 @@ def tabla_desde_filas(filas: list[list[str]]) -> Table | None:
 
 def leer_capitulos() -> list[pathlib.Path]:
     archivos = sorted(INFORME.glob("*.md"))
-    extra = ROOT / "revision" / "revision-adversarial.md"
-    if extra.exists():
-        archivos.append(extra)
+    for nombre in ("revision-adversarial.md", "auditoria-adversarial-2026-11-24.md"):
+        extra = ROOT / "revision" / nombre
+        if extra.exists():
+            archivos.append(extra)
     if not archivos:
         raise SystemExit("No hay archivos .md en informe/")
     return archivos
@@ -142,7 +143,7 @@ def construir_story() -> list:
     story.append(Spacer(1, 1.2 * cm))
     story.append(HRFlowable(width="100%", thickness=2, color=AZUL))
     story.append(Spacer(1, 0.4 * cm))
-    story.append(Paragraph("Informe estratégico y normativo · Versión 1.0", S["coverSmall"]))
+    story.append(Paragraph("Informe estratégico y normativo · Versión 1.1 · Remediación adversarial", S["coverSmall"]))
     story.append(Paragraph(f"Bogotá / Caracas · {hoy}", S["coverSmall"]))
     story.append(Spacer(1, 2.0 * cm))
     aviso = ("<b>Aviso.</b> Este documento es un instrumento de trabajo estratégico y no sustituye "

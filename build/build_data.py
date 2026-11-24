@@ -35,7 +35,8 @@ def main() -> int:
         shutil.copy2(pdf, DOCS / "informe.pdf")
         print(f"PDF copiado: {(DOCS / 'informe.pdf').stat().st_size / 1024:.0f} KB")
     else:
-        print("AVISO: no existe el PDF; ejecute antes build/build_pdf.py")
+        print("ERROR: no existe el PDF; ejecute antes build/build_pdf.py")
+        return 1
     return 0
 
 
